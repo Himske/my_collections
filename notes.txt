@@ -10,3 +10,20 @@ Author:
 
 Book:
 =====
+author,
+title,
+sub_title,
+org_title,
+org_sub_title,
+volume,
+publication_date,
+org_publication_year,
+print_format,
+pages,
+publisher,
+cover,
+language,
+language_iso,
+isbn-13,
+isbn-10,
+description
