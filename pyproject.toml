@@ -1,0 +1,13 @@
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = ["venv", ".venv", ".ruff_cache", ".git"]
+# Enable the pycodestyle (`E`) and Pyflakes (`F`) rules by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+select = ["E", "F"]
+extend-select = ["C4", "SIM", "TCH"]
+ignore = []
+show-fixes = true
+line-length = 119
+[tool.black]
+line-length = 119

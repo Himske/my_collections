@@ -1,0 +1,12 @@
+Endpoints:
+==========
+/authors
+/authors/{author_id}
+/authors/{author_id}/books
+/authors/{author_id}/books/{book_id}
+
+Author:
+=======
+
+Book:
+=====
