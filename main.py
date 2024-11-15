@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from sqlmodel import select
 
 from db import SessionDep
-from models import Author
+from models import Author, AuthorWithBooks
 
 app = FastAPI()
 
@@ -18,9 +18,7 @@ async def read_authors(session: SessionDep) -> list[Author]:
     return authors
 
 
-@app.get("/authors/{id}", response_model=Author)
-async def get_author(id: int, session: SessionDep):
+@app.get("/authors/{id}", response_model=AuthorWithBooks)
+async def get_author(id: int, session: SessionDep) -> AuthorWithBooks:
     author = session.exec(select(Author).where(Author.id == id)).one()
-    for book in author.books:
-        print(book)
     return author

@@ -14,6 +14,12 @@ class Author(SQLModel, table=True):
     books: list["Book"] = Relationship(link_model=BookAuthorLink, back_populates="authors")
 
 
+class AuthorWithBooks(SQLModel):
+    id: int | None
+    name: str
+    books: list["Book"]
+
+
 class Book(SQLModel, table=True):
     __tablename__ = "books"
     id: int | None = Field(default=None, primary_key=True)
@@ -21,9 +27,9 @@ class Book(SQLModel, table=True):
     sub_title: str = Field()
     org_title: str = Field()
     org_sub_title: str = Field()
-    org_publication_year: str = Field()
+    org_publication_year: int = Field()
     print_format: str = Field()
-    pages: str = Field()
+    pages: int = Field()
     publisher: str = Field()
     cover: str = Field()
     language: str = Field()
