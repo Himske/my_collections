@@ -10,7 +10,7 @@ app = FastAPI()
 
 
 @app.get("/authors/", response_model=list[Author])
-async def read_authors(session: SessionDep) -> list[Author]:
+async def get_authors(session: SessionDep) -> list[Author]:
     authors = session.exec(select(Author)).all()
     return authors
 
