@@ -20,6 +20,60 @@ class AuthorWithBooks(SQLModel):
     books: list["Book"]
 
 
+class AuthorCreate(SQLModel):
+    name: str
+
+
+class AuthorUpdate(SQLModel):
+    name: str
+
+
+class AuthorRead(SQLModel):
+    id: int
+    name: str
+
+
+class BookCreate(SQLModel):
+    title: str
+    sub_title: str
+    org_title: str
+    org_sub_title: str
+    org_publication_year: int
+    print_format: str
+    pages: int
+    publisher: str
+    cover: str
+    language: str
+    language_iso: str
+    isbn_13: str
+    isbn_10: str
+    description: str
+    author_ids: list[int] = Field(default_factory=list)
+
+
+class BookUpdate(BookCreate):
+    pass
+
+
+class BookRead(SQLModel):
+    id: int
+    title: str
+    sub_title: str
+    org_title: str
+    org_sub_title: str
+    org_publication_year: int
+    print_format: str
+    pages: int
+    publisher: str
+    cover: str
+    language: str
+    language_iso: str
+    isbn_13: str
+    isbn_10: str
+    description: str
+    authors: list[AuthorRead]
+
+
 class Book(SQLModel, table=True):
     __tablename__ = "books"
     id: int | None = Field(default=None, primary_key=True)
