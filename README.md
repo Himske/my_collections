@@ -29,7 +29,8 @@ uv run uvicorn main:app --reload
 ```
 
 The database is `database.db` in the project directory. Application log
-messages are written to `app.log` beside `main.py`.
+messages are written to `logs/app.log` beside `main.py`, rotating at 5 MB
+with 3 backup files kept.
 
 ## API
 

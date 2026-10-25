@@ -1,0 +1,20 @@
+body { font-family: sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+li { padding: 0.25rem 0; }
+dt { font-weight: bold; margin-top: 0.75rem; }
+dd { margin-left: 0; }
+#isbn { width: 12rem; }
+.error { color: #b00020; }
+
+#cover { max-width: 150px; max-height: 220px; display: block; margin-bottom: 1rem; }
+#cover.zoomable { cursor: zoom-in; }
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+#overlay.open { display: flex; }
+#overlay img { max-width: 95vw; max-height: 95vh; }
