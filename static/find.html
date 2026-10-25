@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Find a book</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <p><a href="/">&larr; Back to authors</a></p>
+  <h1>Find a book</h1>
+  <form id="search-form">
+    <label for="isbn">ISBN-13</label>
+    <input id="isbn" name="isbn" inputmode="numeric" maxlength="17" placeholder="9780008277772" required>
+    <button id="search" type="submit">Search</button>
+  </form>
+  <p id="status"></p>
+  <img id="cover" alt="Book cover" hidden>
+  <dl id="details"></dl>
+  <button id="add" type="button" hidden>Add book</button>
+  <p id="add-status"></p>
+
+  <script src="/static/find.js"></script>
+</body>
+</html>

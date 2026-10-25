@@ -58,20 +58,36 @@ class BookUpdate(BookCreate):
 class BookRead(SQLModel):
     id: int
     title: str
-    sub_title: str
-    org_title: str
-    org_sub_title: str
-    org_publication_year: int
-    print_format: str
-    pages: int
-    publisher: str
-    cover: str
-    language: str
-    language_iso: str
-    isbn_13: str
-    isbn_10: str
-    description: str
+    sub_title: str | None
+    org_title: str | None
+    org_sub_title: str | None
+    org_publication_year: int | None
+    print_format: str | None
+    pages: int | None
+    publisher: str | None
+    cover: str | None
+    language: str | None
+    language_iso: str | None
+    isbn_13: str | None
+    isbn_10: str | None
+    description: str | None
     authors: list[AuthorRead]
+
+
+class BookScrapeResult(SQLModel):
+    author: str | None
+    title: str | None
+    sub_title: str | None
+    publisher: str | None
+    publication_date: str | None
+    language: str | None
+    language_iso: str | None
+    nof_pages: str | None
+    format: str | None
+    image_url: str | None
+    isbn_13: str | None
+    isbn_10: str | None
+    description: str | None
 
 
 class Book(SQLModel, table=True):
