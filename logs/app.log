@@ -901,3 +901,4 @@ FROM authors, books_authors
 WHERE ? = books_authors.book_id AND authors.id = books_authors.author_id
 2026-10-25 09:19:26,847 INFO sqlalchemy.engine.Engine: [cached since 159.3s ago] (860,)
 2026-10-25 09:19:26,847 INFO sqlalchemy.engine.Engine: ROLLBACK
+2026-10-25 09:26:44,113 INFO routers: Searching for book with ISBN 9781471137211

@@ -74,7 +74,7 @@ def get_book_format(soup: bs.BeautifulSoup):
 
 def get_isbn_dict(soup: bs.BeautifulSoup):
     """Gets ISBN-10 and ISBN-13 from a beautifulsoup object"""
-    result = dict({"isbn-10": "", "isbn-13": ""})
+    result = {"isbn-10": "", "isbn-13": ""}
     isbn_list = soup.find_all("div", attrs={"itemprop": "isbn"})
     if isbn_list:
         for isbn in isbn_list:
