@@ -1,5 +1,20 @@
 const list = document.getElementById("authors");
 const statusEl = document.getElementById("status");
+const filterInput = document.getElementById("author-filter");
+let authorRows = [];
+let authorsLoaded = false;
+
+function filterAuthors() {
+  if (!authorsLoaded) return;
+  const prefix = filterInput.value.trim().toLocaleLowerCase();
+  const matchingRows = authorRows.filter(({ author }) =>
+    author.name.toLocaleLowerCase().startsWith(prefix)
+  );
+  list.replaceChildren(...matchingRows.map(({ element }) => element));
+  statusEl.textContent = authorRows.length
+    ? matchingRows.length ? "" : "No authors match this filter."
+    : "No authors found.";
+}
 
 function renderAuthor(author) {
   const li = document.createElement("li");
@@ -45,14 +60,15 @@ async function fetchAuthors() {
   statusEl.className = "";
   statusEl.textContent = "Loading...";
   list.replaceChildren();
+  authorRows = [];
+  authorsLoaded = false;
   try {
     const response = await fetch("/authors/");
     if (!response.ok) throw new Error("HTTP " + response.status);
     const authors = await response.json();
-    statusEl.textContent = authors.length ? "" : "No authors found.";
-    for (const author of authors) {
-      list.appendChild(renderAuthor(author));
-    }
+    authorRows = authors.map((author) => ({ author, element: renderAuthor(author) }));
+    authorsLoaded = true;
+    filterAuthors();
   } catch (err) {
     statusEl.className = "error";
     statusEl.textContent = "Failed to load authors: " + err.message;
@@ -60,4 +76,5 @@ async function fetchAuthors() {
 }
 
 document.getElementById("load").addEventListener("click", fetchAuthors);
+filterInput.addEventListener("input", filterAuthors);
 fetchAuthors();

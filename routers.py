@@ -26,7 +26,7 @@ router = APIRouter()
 @router.get("/authors/", response_model=list[Author])
 async def read_authors(session: SessionDep) -> list[Author]:
     logger.info("Reading all authors")
-    authors = session.exec(select(Author)).all()
+    authors = session.exec(select(Author).order_by(Author.name)).all()
     logger.info("Found %d authors", len(authors))
     return authors
 

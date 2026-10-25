@@ -3,8 +3,6 @@ TODO:
 
 Webpages:
 =========
-Sort authors by name
-Filtering which authors shows up in the list
 Remove author information
 Search and update a book
 Styling
