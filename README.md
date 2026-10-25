@@ -32,6 +32,25 @@ The database is `database.db` in the project directory. Application log
 messages are written to `logs/app.log` beside `main.py`, rotating at 5 MB
 with 3 backup files kept.
 
+## Web interface
+
+Open the application at `/` to browse authors and expand an author to see
+their books. Select a book to open its details page. Use **Find a book by
+ISBN** to search for a book by ISBN-13; search results can be previewed and
+added to the collection.
+
+The application looks up book details on Nicebooks, so finding or importing
+a book requires an internet connection. Adding a book also creates its author
+if they are not already in the collection and saves available cover images.
+
+## Static files
+
+Files in `static/` are served under `/static/`. The directory contains the
+author list (`index.html` and `index.js`), book details (`book.html` and
+`book.js`), ISBN finder (`find.html` and `find.js`), and shared `styles.css`.
+Book cover images are stored in `static/book_covers/` and are available under
+`/static/book_covers/`; imported covers include thumbnail and large versions.
+
 ## API
 
 Interactive API documentation is available at `/docs` (Swagger UI) and
@@ -46,9 +65,18 @@ All routes are relative to the server root. IDs in paths are integers.
 | `GET` | `/authors/{id}` | Get an author and their books |
 | `PUT` | `/authors/{id}` | Replace an author's name |
 | `DELETE` | `/authors/{id}` | Delete an author |
+| `GET` | `/books/search/{isbn}` | Find book details by ISBN-13 |
+| `POST` | `/books/import/{isbn}` | Find and add a book by ISBN-13 |
 | `POST` | `/books/` | Create a book and optionally associate authors |
+| `GET` | `/books/{id}` | Get a book and its authors |
 | `PUT` | `/books/{id}` | Replace a book's details and author associations |
 | `DELETE` | `/books/{id}` | Delete a book |
+
+The ISBN endpoints accept 13 digits, with optional hyphens. Search returns
+book details without saving them. Import adds the book to the database,
+associates its author when available, and saves its cover images. Import
+returns `409 Conflict` if a book with that ISBN-13 is already in the
+collection; an ISBN that cannot be found returns `404 Not Found`.
 
 ### Create an author
 
