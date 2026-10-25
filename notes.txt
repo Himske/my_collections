@@ -1,29 +1,10 @@
-Endpoints:
-==========
-/authors
-/authors/{author_id}
-/authors/{author_id}/books
-/authors/{author_id}/books/{book_id}
-
-Author:
-=======
-
-Book:
+TODO:
 =====
-author,
-title,
-sub_title,
-org_title,
-org_sub_title,
-volume,
-publication_date,
-org_publication_year,
-print_format,
-pages,
-publisher,
-cover,
-language,
-language_iso,
-isbn-13,
-isbn-10,
-description
+
+Webpages:
+=========
+Sort authors by name
+Filtering which authors shows up in the list
+Remove author information
+Search and update a book
+Styling

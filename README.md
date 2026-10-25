@@ -37,7 +37,9 @@ with 3 backup files kept.
 Open the application at `/` to browse authors and expand an author to see
 their books. Select a book to open its details page. Use **Find a book by
 ISBN** to search for a book by ISBN-13; search results can be previewed and
-added to the collection.
+added to the collection. A book's details page also lets you edit its details
+and authors or delete it from the collection. Each author name on the book
+details page has its own edit button.
 
 The application looks up book details on Nicebooks, so finding or importing
 a book requires an internet connection. Adding a book also creates its author

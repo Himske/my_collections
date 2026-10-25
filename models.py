@@ -51,8 +51,22 @@ class BookCreate(SQLModel):
     author_ids: list[int] = Field(default_factory=list)
 
 
-class BookUpdate(BookCreate):
-    pass
+class BookUpdate(SQLModel):
+    title: str
+    sub_title: str | None
+    org_title: str | None
+    org_sub_title: str | None
+    org_publication_year: int | None
+    print_format: str | None
+    pages: int | None
+    publisher: str | None
+    cover: str | None
+    language: str | None
+    language_iso: str | None
+    isbn_13: str | None
+    isbn_10: str | None
+    description: str | None
+    author_ids: list[int] = Field(default_factory=list)
 
 
 class BookRead(SQLModel):

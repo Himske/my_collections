@@ -5,6 +5,11 @@ dd { margin-left: 0; }
 #isbn { width: 12rem; }
 .error { color: #b00020; }
 
+label { display: block; margin-top: 0.75rem; }
+input, textarea, select { box-sizing: border-box; max-width: 100%; }
+textarea { min-height: 6rem; width: 100%; }
+select[multiple] { min-width: 12rem; }
+
 #cover { max-width: 150px; max-height: 220px; display: block; margin-bottom: 1rem; }
 #cover.zoomable { cursor: zoom-in; }
 #overlay {
