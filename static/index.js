@@ -39,7 +39,9 @@ function renderAuthor(author) {
       }
       for (const book of data.books) {
         const item = document.createElement("li");
+        item.className = "book-row";
         const link = document.createElement("a");
+        link.className = "book-link";
         link.href = "/book?id=" + book.id;
         link.textContent = book.title;
         item.appendChild(link);
