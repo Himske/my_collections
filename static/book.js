@@ -285,6 +285,9 @@ async function loadBook() {
 }
 
 document.getElementById("edit").addEventListener("click", openEditForm);
+document.getElementById("update-info").addEventListener("click", () => {
+  window.location.assign("/update?id=" + encodeURIComponent(bookId));
+});
 document.getElementById("delete").addEventListener("click", deleteBook);
 document.getElementById("cancel-edit").addEventListener("click", () => {
   editForm.hidden = true;

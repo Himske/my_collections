@@ -44,6 +44,11 @@ async def book_page() -> FileResponse:
     return FileResponse(os.path.join(os.path.dirname(__file__), "static", "book.html"))
 
 
+@app.get("/update", include_in_schema=False)
+async def update_page() -> FileResponse:
+    return FileResponse(os.path.join(os.path.dirname(__file__), "static", "update.html"))
+
+
 @app.get("/find", include_in_schema=False)
 async def find_page() -> FileResponse:
     return FileResponse(os.path.join(os.path.dirname(__file__), "static", "find.html"))

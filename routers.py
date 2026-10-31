@@ -146,9 +146,10 @@ def search_book(isbn: str) -> BookScrapeResult:
 def import_book(isbn: str, session: SessionDep) -> Book:
     isbn = _parse_isbn(isbn)
     logger.info("Importing book with ISBN %s", isbn)
-    if session.exec(select(Book).where(Book.isbn_13 == isbn)).first():
+    existing = session.exec(select(Book).where(Book.isbn_13 == isbn)).first()
+    if existing:
         logger.warning("Book with ISBN %s already exists", isbn)
-        raise HTTPException(status_code=409, detail="Book already exists")
+        raise HTTPException(status_code=409, detail={"message": "Book already exists", "book_id": existing.id})
 
     info = _scrape_book(isbn, save_image=True)
 
@@ -197,6 +198,28 @@ async def get_book(id: int, session: SessionDep) -> Book:
     if not book:
         logger.warning("Book with ID %s was not found", id)
         raise HTTPException(status_code=404, detail="Book not found")
+    return book
+
+
+@router.post("/books/{id}/cover", response_model=BookRead)
+def replace_book_cover(id: int, session: SessionDep, isbn: str) -> Book:
+    isbn = _parse_isbn(isbn)
+    logger.info("Replacing cover for book with ID %s using ISBN %s", id, isbn)
+    book = session.exec(select(Book).where(Book.id == id)).one_or_none()
+    if not book:
+        logger.warning("Cannot replace cover for book with ID %s: not found", id)
+        raise HTTPException(status_code=404, detail="Book not found")
+
+    info = _scrape_book(isbn, save_image=True)
+    if not info["image_name"]:
+        logger.info("No cover found for ISBN %s", isbn)
+        raise HTTPException(status_code=404, detail="No cover found")
+
+    book.cover = info["image_name"]
+    session.add(book)
+    session.commit()
+    session.refresh(book)
+    logger.info("Replaced cover for book with ID %s", id)
     return book
 
 

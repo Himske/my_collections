@@ -38,7 +38,12 @@ Open the application at `/` to browse authors and expand an author to see
 their books. Select a book to open its details page. Use **Find a book by
 ISBN** to search for a book by ISBN-13; search results can be previewed and
 added to the collection. A book's details page also lets you edit its details
-and authors or delete it from the collection. Each author name on the book
+and authors or delete it from the collection. **Update** opens a
+page with the current details on the right and an ISBN search on the left;
+the found details appear in editable fields, and your edited values replace
+the book's details and, optionally, its cover (authors are kept; blank fields
+keep the current value).
+Each author name on the book
 details page has its own edit button.
 
 The application looks up book details on Nicebooks, so finding or importing
@@ -49,7 +54,8 @@ if they are not already in the collection and saves available cover images.
 
 Files in `static/` are served under `/static/`. The directory contains the
 author list (`index.html` and `index.js`), book details (`book.html` and
-`book.js`), ISBN finder (`find.html` and `find.js`), and shared `styles.css`.
+`book.js`), ISBN finder (`find.html` and `find.js`), book updater
+(`update.html` and `update.js`), and shared `styles.css`.
 Book cover images are stored in `static/book_covers/` and are available under
 `/static/book_covers/`; imported covers include thumbnail and large versions.
 
@@ -73,12 +79,17 @@ All routes are relative to the server root. IDs in paths are integers.
 | `GET` | `/books/{id}` | Get a book and its authors |
 | `PUT` | `/books/{id}` | Replace a book's details and author associations |
 | `DELETE` | `/books/{id}` | Delete a book |
+| `POST` | `/books/{id}/cover?isbn={isbn}` | Replace a book's cover with the one found for an ISBN-13 |
 
 The ISBN endpoints accept 13 digits, with optional hyphens. Search returns
 book details without saving them. Import adds the book to the database,
 associates its author when available, and saves its cover images. Import
 returns `409 Conflict` if a book with that ISBN-13 is already in the
-collection; an ISBN that cannot be found returns `404 Not Found`.
+collection (the response detail contains `message` and the existing `book_id`);
+an ISBN that cannot be found returns `404 Not Found`. On the find page, a
+conflict opens a popup offering to go to the update page for the existing book;
+the found information is carried over, so the update page opens with it already
+filled in.
 
 ### Create an author
 

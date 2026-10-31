@@ -10,16 +10,15 @@
 </head>
 
 <body>
-  <h1>My Book Collection</h1>
-  <h2>Authors</h2>
-  <p><a href="/find">Find a book by ISBN</a></p>
-  <button id="load">Fetch authors</button>
+  <nav aria-label="Main navigation">
+    <a href="/find">Search and add a book</a>
+  </nav>
   <label for="author-filter">Filter authors by name</label>
   <input id="author-filter" type="search" autocomplete="off" placeholder="Starts with...">
   <p id="status"></p>
   <ul id="authors"></ul>
 
-  <script src="/static/index.js"></script>
+  <script src="/static/index.js?v=2"></script>
 </body>
 
 </html>

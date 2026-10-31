@@ -20,6 +20,15 @@
   <button id="add" type="button" hidden>Add book</button>
   <p id="add-status"></p>
 
+  <dialog id="exists-dialog" aria-labelledby="exists-title">
+    <h2 id="exists-title">Book already exists</h2>
+    <p>This book is already in your collection. Compare it with the existing information on the update page?</p>
+    <form method="dialog">
+      <button id="exists-update" value="update">Go to update page</button>
+      <button value="cancel">Close</button>
+    </form>
+  </dialog>
+
   <script src="/static/find.js"></script>
 </body>
 </html>

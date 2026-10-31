@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update book information</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="wide">
+  <p><a id="back" href="/">&larr; Back to authors</a></p>
+  <h1>Update book information</h1>
+  <p id="status"></p>
+  <div class="columns">
+    <section aria-labelledby="found-heading">
+      <h2 id="found-heading">Found information</h2>
+      <form id="search-form">
+        <label for="isbn">ISBN-13</label>
+        <input id="isbn" name="isbn" inputmode="numeric" maxlength="17" placeholder="9780008277772" required>
+        <button id="search" type="submit">Search</button>
+      </form>
+      <p id="search-status"></p>
+      <img id="found-cover" alt="Found book cover" hidden>
+      <form id="found-form" hidden>
+        <p>Edit the found information before updating. Blank fields keep the current value.</p>
+        <div id="found-fields"></div>
+        <label id="replace-cover-label" for="replace-cover" hidden>
+          <input id="replace-cover" type="checkbox" checked> Replace the cover with the found cover
+        </label>
+        <button id="apply" type="submit">Update book with this information</button>
+      </form>
+      <p id="apply-status"></p>
+    </section>
+    <section aria-labelledby="current-heading">
+      <h2 id="current-heading">Current information</h2>
+      <img id="cover" alt="Current book cover" hidden>
+      <dl id="details"></dl>
+    </section>
+  </div>
+
+  <script src="/static/update.js"></script>
+</body>
+</html>

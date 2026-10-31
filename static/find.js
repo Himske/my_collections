@@ -20,12 +20,27 @@ const cover = document.getElementById("cover");
 const dl = document.getElementById("details");
 const addButton = document.getElementById("add");
 const addStatus = document.getElementById("add-status");
+const existsDialog = document.getElementById("exists-dialog");
 let foundIsbn = null;
+let foundBook = null;
+let searchedIsbn = "";
+let existingBookId = null;
 
 function showMessage(text, isError) {
   statusEl.className = isError ? "error" : "";
   statusEl.textContent = text;
 }
+
+function showExistsDialog(bookId) {
+  existingBookId = bookId;
+  existsDialog.showModal();
+}
+
+document.getElementById("exists-update").addEventListener("click", () => {
+  // Hand the search result over so the update page doesn't need a new search
+  sessionStorage.setItem("foundBook", JSON.stringify({ bookId: existingBookId, isbn: searchedIsbn, book: foundBook }));
+  window.location.assign("/update?id=" + encodeURIComponent(existingBookId));
+});
 
 addButton.addEventListener("click", async () => {
   addButton.disabled = true;
@@ -35,7 +50,11 @@ addButton.addEventListener("click", async () => {
     const response = await fetch("/books/import/" + encodeURIComponent(foundIsbn), { method: "POST" });
     if (!response.ok) {
       const body = await response.json().catch(() => ({}));
-      throw new Error(body.detail || "HTTP " + response.status);
+      if (response.status === 409 && body.detail && body.detail.book_id) {
+        showExistsDialog(body.detail.book_id);
+        throw new Error(body.detail.message);
+      }
+      throw new Error(typeof body.detail === "string" ? body.detail : "HTTP " + response.status);
     }
     const book = await response.json();
     addButton.hidden = true;
@@ -90,7 +109,9 @@ form.addEventListener("submit", async (event) => {
       throw new Error(body.detail || "HTTP " + response.status);
     }
     showMessage("", false);
-    showBook(await response.json());
+    foundBook = await response.json();
+    searchedIsbn = isbn.replaceAll("-", "");
+    showBook(foundBook);
   } catch (err) {
     showMessage("Search failed: " + err.message, true);
   } finally {

@@ -4,5 +4,5 @@ TODO:
 Webpages:
 =========
 Remove author information
-Search and update a book
+Add upload of cover
 Styling

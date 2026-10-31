@@ -75,6 +75,5 @@ async function fetchAuthors() {
   }
 }
 
-document.getElementById("load").addEventListener("click", fetchAuthors);
 filterInput.addEventListener("input", filterAuthors);
 fetchAuthors();
