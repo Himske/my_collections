@@ -8,6 +8,6 @@
 - Keep API routes in `routers.py` and their SQLModel tables and request/response models in `models.py`. When changing API fields or behavior, update the corresponding client code under `static/` so its fetch requests and JSON handling remain consistent.
 - The UI is plain HTML, CSS, and JavaScript in `static/`, served by `main.py` under `/static/`; keep page routes and static asset paths consistent with that setup.
 - Book lookup and cover downloads are handled by `book_find.py` through the external Nicebooks site. Keep network-dependent scraping there, and preserve the cover files and paths expected under `static/book_covers/`. Do not assume lookups work without an internet connection.
-- `DataHelpers/load_csv_to_db.py` writes tables with `if_exists="replace"`, replacing existing table contents. Do not run it as routine setup or validation; use `uv run python db.py` to create missing tables.
 - Run the test suite from the repository root with `uv run pytest`. Put pytest tests in `tests/` and use pytest's `test_*.py` naming convention.
+- Run Ruff from the repository root with `uv run ruff check .`. Its enabled rules and line length are configured in `pyproject.toml`.
 - API tests should use FastAPI's `TestClient` and an isolated test database or overridden session dependency; never let tests write to the real `database.db`. Keep tests independent of the external Nicebooks service by mocking the network-facing lookup when needed.

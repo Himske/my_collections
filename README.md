@@ -28,6 +28,22 @@ Start the API from the project directory:
 uv run uvicorn main:app --reload
 ```
 
+## Development checks
+
+Run the test suite from the project directory:
+
+```bash
+uv run pytest
+```
+
+Check Python files with Ruff:
+
+```bash
+uv run ruff check .
+```
+
+Ruff's enabled rules and line length are configured in `pyproject.toml`.
+
 The database is `database.db` in the project directory. Application log
 messages are written to `logs/app.log` beside `main.py`, rotating at 5 MB
 with 3 backup files kept.
