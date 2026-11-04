@@ -62,3 +62,8 @@ show-fixes = true
 line-length = 119
 [tool.black]
 line-length = 119
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
